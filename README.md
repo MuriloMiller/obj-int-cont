@@ -1,4 +1,4 @@
-# obj-int-cont
+# Sensor Crepuscular - Objetos Inteligentes Conectados
 Projeto de Sensor Crepuscular baseado no Arduino UNO elaborado para a materia de Objetos Inteligentes Conectados
 
 A proposta deste projeto é utilizar um sensor LDR em conjunto com o Arduino para ligar e desligar um LED a partir da luminosidade que incide sobre a superfície do sensor, de modo que: 
