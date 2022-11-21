@@ -1,0 +1,260 @@
+[
+    {
+        "id": "edd834b83529e963",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f5b22495ebe7b0a0",
+        "type": "aedes broker",
+        "z": "edd834b83529e963",
+        "name": "broker.mqttdashboard.com",
+        "mqtt_port": "8000",
+        "mqtt_ws_bind": "port",
+        "mqtt_ws_port": "",
+        "mqtt_ws_path": "",
+        "cert": "",
+        "key": "",
+        "certname": "",
+        "keyname": "",
+        "dburl": "",
+        "usetls": false,
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "05ccdc3c5b4b5933",
+        "type": "serial in",
+        "z": "edd834b83529e963",
+        "name": "ldr",
+        "serial": "f4321691aa79437d",
+        "x": 310,
+        "y": 400,
+        "wires": [
+            [
+                "7d1a6f19a69a70ba"
+            ]
+        ]
+    },
+    {
+        "id": "7d1a6f19a69a70ba",
+        "type": "change",
+        "z": "edd834b83529e963",
+        "name": "transformaEstado",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "Sensor Crepuscular Desativado",
+                "fromt": "str",
+                "to": "false",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "Sensor Crepuscular Ativado",
+                "fromt": "str",
+                "to": "true",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 400,
+        "wires": [
+            [
+                "87e2ac4b05ae27f0"
+            ]
+        ]
+    },
+    {
+        "id": "87e2ac4b05ae27f0",
+        "type": "mqtt out",
+        "z": "edd834b83529e963",
+        "name": "enviaEstado",
+        "topic": "estadoLDR",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "645d286351e41512",
+        "x": 730,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e860ac9939237205",
+        "type": "mqtt in",
+        "z": "edd834b83529e963",
+        "name": "recebeEstado",
+        "topic": "estadoLDR",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "645d286351e41512",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 520,
+        "wires": [
+            [
+                "443c6e35984e1286",
+                "22ebb75275e313a8"
+            ]
+        ]
+    },
+    {
+        "id": "443c6e35984e1286",
+        "type": "change",
+        "z": "edd834b83529e963",
+        "name": "transformaEstado",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "Desativado",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "Ativado",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 580,
+        "wires": [
+            [
+                "04d288a7dfc87041"
+            ]
+        ]
+    },
+    {
+        "id": "04d288a7dfc87041",
+        "type": "ui_text",
+        "z": "edd834b83529e963",
+        "group": "e76bc09589e0b8a1",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Poste da Rua 13",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 790,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "22ebb75275e313a8",
+        "type": "debug",
+        "z": "edd834b83529e963",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f4321691aa79437d",
+        "type": "serial-port",
+        "serialport": "COM3",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "645d286351e41512",
+        "type": "mqtt-broker",
+        "name": "broker.mqttdashboard.com",
+        "broker": "localhost",
+        "port": "8000",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e76bc09589e0b8a1",
+        "type": "ui_group",
+        "name": "Sensor Crepuscular",
+        "tab": "169c98d59f8f4b97",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "169c98d59f8f4b97",
+        "type": "ui_tab",
+        "name": "Sensor Crepuscular",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
